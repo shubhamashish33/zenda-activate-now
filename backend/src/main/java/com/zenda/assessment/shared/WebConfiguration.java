@@ -9,7 +9,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     private final String origin;
     public WebConfiguration(@Value("${app.cors-origin}") String origin) { this.origin = origin; }
     @Override public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedOrigins(origin).allowedMethods("GET", "PUT")
+        registry.addMapping("/api/**").allowedOrigins(origin.split(",")).allowedMethods("GET", "PUT")
             .allowedHeaders("Content-Type").maxAge(3600);
     }
 }

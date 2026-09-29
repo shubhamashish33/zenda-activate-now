@@ -2,10 +2,19 @@ import { FormControl } from '@angular/forms';
 import { fieldValidator, normalize } from './validation';
 
 describe('Activation validation', () => {
-  it.each(['+91987654321', '+9198765432101', '9876543210', '+91abcdefghij'])('rejects invalid phone %s', value => {
-    expect(new FormControl(value, fieldValidator('phone')).invalid).toBe(true);
-  });
-  it.each(['parent@example.org', 'parentexample.com', 'parent@.com', 'a..b@example.com', 'parent@-example.com'])('rejects invalid email %s', value => {
+  it.each(['+91987654321', '+9198765432101', '9876543210', '+91abcdefghij'])(
+    'rejects invalid phone %s',
+    (value) => {
+      expect(new FormControl(value, fieldValidator('phone')).invalid).toBe(true);
+    },
+  );
+  it.each([
+    'parent@example.org',
+    'parentexample.com',
+    'parent@.com',
+    'a..b@example.com',
+    'parent@-example.com',
+  ])('rejects invalid email %s', (value) => {
     expect(new FormControl(value, fieldValidator('email')).invalid).toBe(true);
   });
   it('normalizes formatted phones and lowercase PAN before validation', () => {

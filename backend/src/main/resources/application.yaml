@@ -20,4 +20,4 @@ server:
     include-message: never
     include-stacktrace: never
 app:
-  cors-origin: ${CORS_ORIGIN:http://localhost:4200}
+  cors-origin: ${CORS_ORIGIN:http://localhost:4200,http://127.0.0.1:4200}

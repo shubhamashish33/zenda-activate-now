@@ -1,7 +1,15 @@
-<dialog #dialog aria-labelledby="activation-title" (cancel)="cancel($event)">
+<dialog #dialog aria-labelledby="activation-title" (cancel)="cancel($event)" (keydown)="trapFocus($event)">
   <div class="modal-heading">
     <h2 id="activation-title">Please enter your details below</h2>
-    <button type="button" class="close-button" aria-label="Close activation form" [disabled]="busy()" (click)="cancel()">×</button>
+    <button
+      type="button"
+      class="close-button"
+      aria-label="Close activation form"
+      [disabled]="busy()"
+      (click)="cancel()"
+    >
+      ×
+    </button>
   </div>
   <form [formGroup]="form" (ngSubmit)="submit()" novalidate [attr.aria-busy]="busy()">
     <fieldset [disabled]="busy()">
@@ -9,20 +17,44 @@
         <div class="form-field" [class.has-error]="error(field.key)">
           <label [for]="field.key">{{ field.label }}</label>
           <div class="input-row">
-            <input [id]="field.key" [type]="field.type" [formControlName]="field.key" [placeholder]="field.placeholder" [autocomplete]="field.autocomplete" [maxlength]="field.maxLength" [attr.aria-invalid]="!!error(field.key)" [attr.aria-describedby]="error(field.key) ? field.key + '-error' : null" (blur)="blur(field.key)" [attr.autocapitalize]="field.key === 'pan' ? 'characters' : 'off'" [spellcheck]="false" />
+            <input
+              [id]="field.key"
+              [type]="field.type"
+              [formControlName]="field.key"
+              [placeholder]="field.placeholder"
+              [autocomplete]="field.autocomplete"
+              [maxlength]="field.maxLength"
+              [attr.aria-invalid]="!!error(field.key)"
+              [attr.aria-describedby]="error(field.key) ? field.key + '-error' : null"
+              (blur)="blur(field.key)"
+              [attr.autocapitalize]="field.key === 'pan' ? 'characters' : 'off'"
+              [spellcheck]="false"
+            />
             @if ((field.key === 'phone' || field.key === 'email') && valid(field.key)) {
-              <span class="valid-tick" [attr.aria-label]="field.label + ' is valid'" role="img">✓</span>
+              <span class="valid-tick" [attr.aria-label]="field.label + ' is valid'" role="img"
+                >✓</span
+              >
             }
           </div>
-          @if (error(field.key)) { <p class="field-error" [id]="field.key + '-error'">{{ error(field.key) }}</p> }
+          @if (error(field.key)) {
+            <p class="field-error" [id]="field.key + '-error'">{{ error(field.key) }}</p>
+          }
         </div>
       }
     </fieldset>
-    @if (message()) { <p class="submit-error" role="alert">{{ message() }}</p> }
+    @if (message()) {
+      <p class="submit-error" role="alert">{{ message() }}</p>
+    }
     <div class="actions">
-      <button type="button" class="cancel-button" [disabled]="busy()" (click)="cancel()">Cancel</button>
-      <button type="submit" class="submit-button" [disabled]="busy()">{{ busy() ? 'Activating…' : 'Activate Now' }}</button>
+      <button type="button" class="cancel-button" [disabled]="busy()" (click)="cancel()">
+        Cancel
+      </button>
+      <button type="submit" class="submit-button" [disabled]="busy()">
+        {{ busy() ? 'Activating…' : 'Activate Now' }}
+      </button>
     </div>
-    <span class="sr-only" role="status">{{ busy() ? 'Submitting your activation. Please wait.' : '' }}</span>
+    <span class="sr-only" role="status">{{
+      busy() ? 'Submitting your activation. Please wait.' : ''
+    }}</span>
   </form>
 </dialog>

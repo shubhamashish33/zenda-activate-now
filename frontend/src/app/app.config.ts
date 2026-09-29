@@ -6,5 +6,5 @@ import enIN from '@angular/common/locales/en-IN';
 registerLocaleData(enIN);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()]
+  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
 };

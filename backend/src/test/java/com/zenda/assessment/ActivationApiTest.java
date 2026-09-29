@@ -106,8 +106,16 @@ class ActivationApiTest {
         mvc.perform(options("/api/v1/students/1/activation").header("Origin", "http://localhost:4200")
             .header("Access-Control-Request-Method", "PUT"))
             .andExpect(status().isOk()).andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:4200"));
+        mvc.perform(options("/api/v1/students/1/activation").header("Origin", "http://127.0.0.1:4200")
+            .header("Access-Control-Request-Method", "PUT")).andExpect(status().isOk());
         mvc.perform(options("/api/v1/students/1/activation").header("Origin", "https://untrusted.example")
             .header("Access-Control-Request-Method", "PUT")).andExpect(status().isForbidden());
+    }
+
+    @Test void malformedIdentifierAndUnsupportedMethodKeepTheirHttpSemantics() throws Exception {
+        mvc.perform(get("/api/v1/students/not-a-number/dashboard")).andExpect(status().isBadRequest());
+        mvc.perform(post("/api/v1/students/1/activation")).andExpect(status().isMethodNotAllowed());
+        mvc.perform(get("/api/v1/unknown")).andExpect(status().isNotFound());
     }
 
     @Test void concurrentFirstSubmissionsCreateOneRow() throws Exception {
