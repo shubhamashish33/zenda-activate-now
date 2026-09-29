@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" fill="none">
+  <g fill="#fff" opacity=".28">
+    <path d="M8 180c0-14 10-24 23-25v-28c0-41 24-68 57-68 35 0 59 28 59 68v28c14 2 24 12 24 25Z"/>
+    <path d="M48 62c8-20 22-31 40-31s33 11 41 31Z"/><circle cx="88" cy="32" r="18"/>
+    <ellipse cx="176" cy="152" rx="32" ry="12"/><ellipse cx="173" cy="127" rx="32" ry="12"/>
+    <ellipse cx="176" cy="103" rx="32" ry="12"/><ellipse cx="175" cy="79" rx="32" ry="12"/>
+  </g>
+  <g stroke="#7220c5" stroke-width="6" opacity=".75"><path d="m64 143 26 29M146 101c13 12 38 14 55 2M145 128c14 12 38 14 57 0M147 153c13 10 35 13 54 1"/></g>
+  <text x="173" y="85" font-family="Arial,sans-serif" font-size="20" text-anchor="middle" fill="#7220c5" opacity=".8">₹</text>
+</svg>

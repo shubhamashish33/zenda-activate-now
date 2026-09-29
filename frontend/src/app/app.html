@@ -1,1 +1,9 @@
-<main><h1>Zenda activation assessment</h1></main>
+<main class="app-shell" aria-label="School fee dashboard">
+  @if (loading()) {
+    <div class="load-state" role="status"><span class="spinner" aria-hidden="true"></span><p>Loading your dashboard…</p></div>
+  } @else if (error()) {
+    <div class="load-state"><h1>Let’s try again</h1><p role="alert">{{ error() }}</p><button type="button" class="retry-button" (click)="load()">Retry</button></div>
+  } @else if (dashboard(); as data) {
+    <app-dashboard [data]="data" />
+  }
+</main>

@@ -1,0 +1,23 @@
+:host { display: block; }
+.school-header { height: 154px; padding: 31px 16px; display: flex; gap: 14px; align-items: flex-start; background: linear-gradient(105deg, #ff6b91, #ffa364); border-radius: 0 0 0 34px; color: #fff; }
+h1 { margin: 12px 0 0; font-size: 18px; font-weight: 600; }
+.dashboard-content { padding: 0 14px 32px; }
+.student-card { position: relative; margin-top: -47px; min-height: 94px; display: flex; align-items: center; gap: 14px; padding: 9px 12px; background: #fff; border-radius: 17px; }
+.avatar { border-radius: 50%; object-fit: cover; border: 5px solid #fff; box-shadow: 0 0 12px #00000008; }
+.student-card h2 { margin: 0 0 6px; font-size: 18px; font-weight: 400; color: var(--ink); }
+.student-card p { display: flex; align-items: center; gap: 4px; margin: 0; font-size: 12px; color: #747783; }
+.fee-card { position: relative; isolation: isolate; overflow: hidden; height: 280px; margin-top: 14px; padding: 28px; background: linear-gradient(175deg, #d31987, #6810d0); border-radius: 16px; color: white; }
+.fee-card h2 { margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -.35px; }
+.verified-badge { position: absolute; top: 28px; right: 26px; width: 36px; height: 36px; }
+.interest { display: flex; gap: 13px; align-items: center; margin-top: 12px; }
+.interest strong { font-size: 72px; line-height: 1; letter-spacing: -3px; }
+.interest p { margin: 0; font-size: 17px; line-height: 1.15; font-weight: 600; }
+.fee-art { position: absolute; right: -6px; bottom: -8px; width: 196px; z-index: -1; }
+.fee-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 23px; }
+.fee-bottom p { margin: 0 0 1px; font-size: 17px; font-weight: 600; }
+.fee-bottom strong { font-size: 32px; line-height: 1.1; white-space: nowrap; }
+.activate-button { min-width: 150px; min-height: 50px; padding: 12px 16px; background: #fff; color: var(--ink); font-size: 15px; font-weight: 700; border: 0; border-radius: 30px; box-shadow: 0 5px 12px #4d147720; }
+.activate-button:hover { background: #f2fdfa; }
+.activate-button.activated { color: #14785f; cursor: default; }
+@media (max-width: 380px) { .fee-card { padding: 24px 20px; } .fee-card h2 { font-size: 22px; } .interest { gap: 10px; } .interest strong { font-size: 64px; } .interest p { font-size: 15px; } .fee-bottom strong { font-size: 27px; } .activate-button { min-width: 126px; padding-inline: 12px; font-size: 14px; } .student-card h2 { font-size: 16px; } }
+@media (max-width: 340px) { .fee-card { padding: 24px 16px; } .fee-bottom strong { font-size: 24px; } .activate-button { min-width: 112px; font-size: 13px; } .interest p { font-size: 13px; } }
