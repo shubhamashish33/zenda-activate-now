@@ -92,8 +92,6 @@ CAPTURE_EVIDENCE=1 npm run e2e:evidence
 
 PowerShell: `$env:CAPTURE_EVIDENCE='1'; npm run e2e:evidence`. Output: [`docs/evidence`](docs/evidence). Reports/traces remain local in ignored `playwright-report` and `test-results` directories.
 
-GitHub Actions runs backend, frontend, and production Docker/browser checks.
-
 The completed local verification includes 20 backend tests against real MySQL, 16 Angular unit tests, and 8 full-stack Chromium tests. The browser suite covers the successful flow, validation, cancellation through every close path, retry after failures, keyboard focus, accessibility scans, and responsive layouts from 320px mobile to desktop. The production Angular build and complete Docker stack also build successfully.
 
 ### Requirement coverage
@@ -105,7 +103,7 @@ The completed local verification includes 20 backend tests against real MySQL, 1
 | Validated activation | Matching client/server rules, inline feedback, structured errors, and retry-safe transactional persistence. |
 | Cancellation behavior | Cancel, close, Escape, and backdrop paths discard input and perform no database write. |
 | Persistence and duplicate safety | One activation per student, parent-row locking, idempotent PUT behavior, reload/restart verification. |
-| Quality and handoff | Real-MySQL integration tests, unit/browser/accessibility tests, Docker, CI, screenshots, and a walkthrough guide. |
+| Quality and handoff | Real-MySQL integration tests, unit/browser/accessibility tests, Docker, and committed screenshots. |
 
 ## AI-assisted development
 

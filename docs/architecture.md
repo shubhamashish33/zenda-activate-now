@@ -17,7 +17,7 @@ sequenceDiagram
     Form->>API: PUT activation DTO
     API->>API: Normalize and Bean Validation
     API->>Service: activate(studentId, request)
-    Service->>DB: Lock student; read/upsert activation
+    Service->>DB: Lock student and read or upsert activation
     DB-->>Service: Commit
     Service-->>Form: Persisted activation response
     Form-->>UI: Close dialog and announce success
