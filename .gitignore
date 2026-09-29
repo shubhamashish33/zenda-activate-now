@@ -7,6 +7,7 @@ target/
 playwright-report/
 test-results/
 tmp/
+output/
 .idea/
 .vscode/*
 !.vscode/extensions.json

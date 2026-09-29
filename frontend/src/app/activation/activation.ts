@@ -117,11 +117,16 @@ export class ActivationComponent implements AfterViewInit, OnDestroy {
     );
     const first = elements[0];
     const last = elements[elements.length - 1];
-    if (!first) { event.preventDefault(); return; }
+    if (!first) {
+      event.preventDefault();
+      return;
+    }
     if (event.shiftKey && this.document.activeElement === first) {
-      event.preventDefault(); last.focus();
+      event.preventDefault();
+      last.focus();
     } else if (!event.shiftKey && this.document.activeElement === last) {
-      event.preventDefault(); first.focus();
+      event.preventDefault();
+      first.focus();
     }
   }
   cancel(event?: Event) {

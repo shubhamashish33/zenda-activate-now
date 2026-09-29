@@ -1,4 +1,9 @@
-<dialog #dialog aria-labelledby="activation-title" (cancel)="cancel($event)" (keydown)="trapFocus($event)">
+<dialog
+  #dialog
+  aria-labelledby="activation-title"
+  (cancel)="cancel($event)"
+  (keydown)="trapFocus($event)"
+>
   <div class="modal-heading">
     <h2 id="activation-title">Please enter your details below</h2>
     <button

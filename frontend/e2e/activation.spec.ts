@@ -36,7 +36,9 @@ test.afterAll(async () => {
 });
 
 function dashboardTrigger(page: Page) {
-  return page.getByLabel('School fee payment').getByRole('button', { name: 'Activate Now', exact: true });
+  return page
+    .getByLabel('School fee payment')
+    .getByRole('button', { name: 'Activate Now', exact: true });
 }
 function submitButton(page: Page) {
   return page.getByRole('dialog').getByRole('button', { name: 'Activate Now', exact: true });
