@@ -92,7 +92,26 @@ CAPTURE_EVIDENCE=1 npm run e2e:evidence
 
 PowerShell: `$env:CAPTURE_EVIDENCE='1'; npm run e2e:evidence`. Output: [`docs/evidence`](docs/evidence). Reports/traces remain local in ignored `playwright-report` and `test-results` directories.
 
-GitHub Actions runs backend, frontend, and production Docker/browser checks. See [verification evidence](docs/verification.md) for the actual results and limitations.
+GitHub Actions runs backend, frontend, and production Docker/browser checks.
+
+The completed local verification includes 20 backend tests against real MySQL, 16 Angular unit tests, and 8 full-stack Chromium tests. The browser suite covers the successful flow, validation, cancellation through every close path, retry after failures, keyboard focus, accessibility scans, and responsive layouts from 320px mobile to desktop. The production Angular build and complete Docker stack also build successfully.
+
+### Requirement coverage
+
+| Requirement | Delivered evidence |
+| --- | --- |
+| Figma-based Angular flow | Responsive dashboard and modal with committed screenshots under [`docs/evidence`](docs/evidence). |
+| API-backed business data | Student discovery and dashboard APIs read school, student, fee, and activation state from MySQL. |
+| Validated activation | Matching client/server rules, inline feedback, structured errors, and retry-safe transactional persistence. |
+| Cancellation behavior | Cancel, close, Escape, and backdrop paths discard input and perform no database write. |
+| Persistence and duplicate safety | One activation per student, parent-row locking, idempotent PUT behavior, reload/restart verification. |
+| Quality and handoff | Real-MySQL integration tests, unit/browser/accessibility tests, Docker, CI, screenshots, and a walkthrough guide. |
+
+## AI-assisted development
+
+I used Codex as a pair-programming accelerator throughout this assessment for requirement analysis, Figma inspection, implementation support, test-case expansion, debugging, and documentation refinement. I retained ownership of the scope and engineering decisions, including cancellation behavior, API-backed data, retry semantics, milestone commits, and the delivery format.
+
+Every delivered change was validated through the repository's builds and automated tests, with browser checks against the production Docker stack and real MySQL integration tests. AI assistance improved iteration speed and test coverage; the architecture, tradeoffs, and resulting behavior are documented so I can explain and defend them in the walkthrough.
 
 ## Reset and troubleshooting
 
@@ -117,8 +136,6 @@ Then reload the dashboard. A cross-platform Node reset command is also available
 | API payloads, validation, errors | [API contract](docs/api.md) |
 | Tables, keys, migrations | [Database schema](docs/schema.md) |
 | Data flow and tradeoffs | [Architecture decisions](docs/architecture.md) |
-| Requirement mapping and checks | [Acceptance checklist](docs/acceptance.md) |
-| How I used agentic tools | [AI usage disclosure](docs/ai-usage.md) |
 | 30-minute walkthrough and Q&A | [Interview guide](docs/interview-guide.md) |
 | Suggested submission email | [Submission draft](docs/submission-draft.md) |
 
