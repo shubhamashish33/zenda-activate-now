@@ -1,0 +1,11 @@
+import { TestBed } from '@angular/core/testing';
+import { App } from './app';
+
+describe('App foundation', () => {
+  it('renders the assessment shell', async () => {
+    await TestBed.configureTestingModule({ imports: [App] }).compileComponents();
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('h1').textContent).toContain('Zenda');
+  });
+});
