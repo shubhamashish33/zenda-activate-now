@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    password: ${DB_PASSWORD:zenda_local_only}
+  flyway:
+    locations: classpath:db/migration,classpath:db/dev

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: zenda-activation
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3307/zenda}
+    username: ${DB_USERNAME:zenda}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration
+  mvc:
+    problemdetails:
+      enabled: true
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+app:
+  cors-origin: ${CORS_ORIGIN:http://localhost:4200}
