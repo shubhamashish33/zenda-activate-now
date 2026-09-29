@@ -136,8 +136,6 @@ Then reload the dashboard. A cross-platform Node reset command is also available
 | API payloads, validation, errors | [API contract](docs/api.md) |
 | Tables, keys, migrations | [Database schema](docs/schema.md) |
 | Data flow and tradeoffs | [Architecture decisions](docs/architecture.md) |
-| 30-minute walkthrough and Q&A | [Interview guide](docs/interview-guide.md) |
-| Suggested submission email | [Submission draft](docs/submission-draft.md) |
 
 Repository agent conventions are in [AGENTS.md](AGENTS.md); [CLAUDE.md](CLAUDE.md) references the same instructions.
 
