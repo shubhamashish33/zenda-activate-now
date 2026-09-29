@@ -4,6 +4,10 @@
   } @else if (error()) {
     <div class="load-state"><h1>Let’s try again</h1><p role="alert">{{ error() }}</p><button type="button" class="retry-button" (click)="load()">Retry</button></div>
   } @else if (dashboard(); as data) {
-    <app-dashboard [data]="data" />
+    <app-dashboard [data]="data" (activate)="modalOpen.set(true)" />
+    @if (notice()) { <p class="success-notice" role="status">{{ notice() }}</p> }
+    @if (modalOpen()) {
+      <app-activation [studentId]="data.student.id" (cancelled)="modalOpen.set(false)" (activated)="activated($event)" />
+    }
   }
 </main>
