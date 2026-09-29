@@ -64,10 +64,13 @@ test('dashboard → validation → activation → reload @evidence', async ({ pa
   await capture(page, '01-dashboard.png');
   await dashboardTrigger(page).click();
   await expect(page.getByLabel('Phone Number', { exact: true })).toBeFocused();
+  await expect(submitButton(page)).toBeDisabled();
   await capture(page, '02-activation-form.png');
   await page.getByLabel('Phone Number', { exact: true }).fill('+91987654321');
   await page.getByLabel('Email', { exact: true }).fill('parent@example.org');
-  await submitButton(page).click();
+  await page.getByLabel('Phone Number', { exact: true }).blur();
+  await page.getByLabel('Email', { exact: true }).blur();
+  await expect(submitButton(page)).toBeDisabled();
   await expect(page.getByText('Enter +91 followed by exactly 10 digits.')).toBeVisible();
   await expect(page.getByText('Enter a valid email ending in .com.')).toBeVisible();
   await capture(page, '03-validation-errors.png');
@@ -76,6 +79,7 @@ test('dashboard → validation → activation → reload @evidence', async ({ pa
   );
   expect(empty[0]['count']).toBe(0);
   await fillValid(page);
+  await expect(submitButton(page)).toBeEnabled();
   await expect(page.getByRole('img', { name: 'Phone Number is valid' })).toBeVisible();
   await expect(page.getByRole('img', { name: 'Email is valid' })).toBeVisible();
   await capture(page, '04-valid-details.png');
@@ -94,12 +98,15 @@ test('dashboard → validation → activation → reload @evidence', async ({ pa
   await capture(page, '06-persisted-after-reload.png');
 });
 
-test('cancel, close and Escape discard input, restore focus, and never write', async ({ page }) => {
+test('cancel, close, Escape and backdrop discard input, restore focus, and never write', async ({
+  page,
+}) => {
   const trigger = dashboardTrigger(page);
-  for (const action of ['Cancel', 'Close', 'Escape']) {
+  for (const action of ['Cancel', 'Close', 'Escape', 'Backdrop']) {
     await trigger.click();
     await fillValid(page);
     if (action === 'Escape') await page.keyboard.press('Escape');
+    else if (action === 'Backdrop') await page.mouse.click(8, 8);
     else
       await page
         .getByRole('button', {
@@ -116,6 +123,7 @@ test('cancel, close and Escape discard input, restore focus, and never write', a
   expect(rows[0]['count']).toBe(0);
   await trigger.click();
   await expect(page.getByLabel('Phone Number', { exact: true })).toHaveValue('');
+  await expect(submitButton(page)).toBeDisabled();
 });
 
 test('server failure preserves details and retry succeeds', async ({ page }) => {

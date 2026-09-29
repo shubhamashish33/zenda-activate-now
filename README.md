@@ -47,8 +47,8 @@ Do not run the native backend and Docker backend on the same port. The native ap
 
 - The first student returned by the discovery API supplies the dashboard identity; school, student, annual fee, interest, and activation state come from MySQL.
 - Phone, PAN, name as on PAN, and email are required. Phone normalizes to `+91` plus ten digits; email must be valid and end in `.com`. PAN is uppercased and format-checked.
-- Valid phone/email fields show green ticks. Invalid fields show inline messages; server-side validation independently protects the API.
-- Cancel, close, and Escape discard unsaved fields, write nothing, and restore focus. Reopening starts with an empty form.
+- Valid phone/email fields show green ticks. Invalid fields show inline messages; Activate Now stays disabled until every field is valid. Server-side validation independently protects the API.
+- Cancel, close, Escape, and clicking the backdrop discard unsaved fields, write nothing, and restore focus. Reopening starts with an empty form.
 - Activate disables duplicate submissions, persists transactionally, returns to the dashboard, and shows Activated. Failed requests preserve details for retry.
 - A native dialog provides focus containment/background inertness. The 414px reference layout adapts to narrower screens and remains centered on desktop.
 

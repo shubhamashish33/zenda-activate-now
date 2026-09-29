@@ -2,6 +2,7 @@
   #dialog
   aria-labelledby="activation-title"
   (cancel)="cancel($event)"
+  (click)="backdropClick($event)"
   (keydown)="trapFocus($event)"
 >
   <div class="modal-heading">
@@ -54,7 +55,7 @@
       <button type="button" class="cancel-button" [disabled]="busy()" (click)="cancel()">
         Cancel
       </button>
-      <button type="submit" class="submit-button" [disabled]="busy()">
+      <button type="submit" class="submit-button" [disabled]="busy() || !canSubmit()">
         {{ busy() ? 'Activating…' : 'Activate Now' }}
       </button>
     </div>

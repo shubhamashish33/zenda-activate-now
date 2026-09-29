@@ -4,6 +4,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
@@ -13,9 +14,9 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { finalize, map, startWith } from 'rxjs';
 import { ActivationRequest, ActivationResponse, AssessmentApi } from '../core/api';
 import { fieldValidator, normalize } from './validation';
 
@@ -85,6 +86,16 @@ export class ActivationComponent implements AfterViewInit, OnDestroy {
     }),
     email: new FormControl('', { nonNullable: true, validators: [fieldValidator('email')] }),
   });
+  private readonly formValid = toSignal(
+    this.form.statusChanges.pipe(
+      map(() => this.form.valid),
+      startWith(this.form.valid),
+    ),
+    { initialValue: this.form.valid },
+  );
+  readonly canSubmit = computed(
+    () => this.formValid() && Object.values(this.serverErrors()).every((error) => !error),
+  );
   private readonly api = inject(AssessmentApi);
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
@@ -135,6 +146,19 @@ export class ActivationComponent implements AfterViewInit, OnDestroy {
     this.dialog().nativeElement.close();
     this.cancelled.emit();
   }
+  backdropClick(event: MouseEvent) {
+    const dialog = this.dialog().nativeElement;
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom
+    ) {
+      this.cancel();
+    }
+  }
   blur(field: Field) {
     const control = this.form.controls[field];
     control.setValue(normalize(field, control.value));
@@ -160,8 +184,10 @@ export class ActivationComponent implements AfterViewInit, OnDestroy {
     if (this.busy()) return;
     for (const field of this.fields) this.blur(field.key);
     this.form.markAllAsTouched();
-    if (this.form.invalid) {
-      const invalid = this.fields.find((field) => this.form.controls[field.key].invalid);
+    if (!this.canSubmit()) {
+      const invalid = this.fields.find(
+        (field) => this.form.controls[field.key].invalid || this.serverErrors()[field.key],
+      );
       this.dialog().nativeElement.querySelector<HTMLInputElement>(`#${invalid?.key}`)?.focus();
       return;
     }

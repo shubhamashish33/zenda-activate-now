@@ -131,8 +131,14 @@ input::placeholder {
   background: var(--mint);
   color: #164f42;
 }
-.submit-button:hover {
+.submit-button:not(:disabled):hover {
   background: #47c9ae;
+}
+.submit-button:disabled {
+  background: #d5d7dc;
+  color: #5d626b;
+  opacity: 1;
+  cursor: not-allowed;
 }
 button:disabled {
   opacity: 0.65;
